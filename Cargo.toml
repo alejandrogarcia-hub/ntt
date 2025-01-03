@@ -1,0 +1,7 @@
+[package]
+name = "ntt"
+version = "0.1.0"
+edition = "2021"
+authors = ["alejandrogarcia-hub <alejandrogarcia-hub@proton.me>"]
+
+[dependencies]
