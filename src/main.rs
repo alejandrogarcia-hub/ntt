@@ -21,7 +21,7 @@ where
 /// * `a` - Coefficients of the first polynomial
 /// * `b` - Coefficients of the second polynomial
 /// # Returns
-/// * `Vec<i32>` - Coefficients of the resulting polynomial
+/// * `Vec<i64>` - Coefficients of the resulting polynomial
 fn polynomial_multiply(a: &[i64], b: &[i64]) -> Vec<i64> {
     let n = a.len();
     let m = b.len();
@@ -45,22 +45,24 @@ fn polynomial_multiply(a: &[i64], b: &[i64]) -> Vec<i64> {
 /// they would in the polynomial ring Z[x]/(x^n - 1).
 /// Thus, using n directly in the modulo operation is sufficient 
 // for capturing the behavior of the ring Z[x]/(x^n - 1) in discrete implementations.
+///
+/// # Arguments
+/// * `a` - Coefficients of the first polynomial
+/// * `b` - Coefficients of the second polynomial
+/// # Returns
+/// * `Vec<i64>` - Coefficients of the resulting polynomial
 fn positive_wrapped_convolution(a: &[i64], b: &[i64]) -> Vec<i64> {
     let n = a.len();
     assert_eq!(n, b.len(), "Input sequences must have the same length");
-
     let mut result = vec![0; n];
-
     for x in 0..n {
         for i in 0..n {
-            let j = (x + n - i) % n; // Corrected modular index calculation
+            let j = (x + n - i) % n; // Correct modular index calculation
             result[x] += a[i] * b[j];
         }
     }
-
     result
 }
-
 
 fn main() {
     // Polynomials A(x) = 1 + 2x + 3x^2 and B(x) = 4 + 5x
